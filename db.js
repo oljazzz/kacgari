@@ -1,15 +1,15 @@
-var MongoClient = require('mongodb').MongoClient;
+const MongoClient = require('mongodb').MongoClient;
 
 var state = {
     db: null
 };
 
-exports.connect = function(url, done){
-    if(state.db){
+exports.connect = (url, done) => {
+    if (state.db) {
         return done();
     }
-    MongoClient.connect(url, function(err, db){
-        if(err){
+    MongoClient.connect(url, (err, db) => {
+        if (err) {
             return done(err);
         }
         state.db = db;
@@ -18,6 +18,6 @@ exports.connect = function(url, done){
 
 }
 
-exports.get = function(){
+exports.get = () => {
     return state.db;
 }
