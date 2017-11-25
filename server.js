@@ -9,17 +9,17 @@ const wordsController = require('./controllers/words');
 const app = express();
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
-app.get('/', function(req,res){
+app.use(bodyParser.urlencoded({ extended: true }));
+app.get('/', function (req, res) {
     res.send("Hello Kacgari API");
 })
 
-db.connect(function(err){
-    if(err){
+db.connect(function (err) {
+    if (err) {
         return console.log(err);
     }
-    
-    app.listen(port, ()=>{
+
+    app.listen(port, () => {
         console.log('Сервер сәтті қосылды!');
     })
 
@@ -29,5 +29,5 @@ app.get('/words', wordsController.all);
 app.get('/words/:id', wordsController.findById);
 app.post('/words', wordsController.create);
 app.put('/words/:id', wordsController.update);
-app.delete('/words',wordsController.delete);
+app.delete('/words', wordsController.delete);
 
