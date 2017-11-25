@@ -4,6 +4,7 @@ const MongoClient = require('mongodb').MongoClient;
 const ObjectID = require('mongodb').ObjectID;
 const db = require('./config/db');
 const port = 3012;
+const host = '0.0.0.0';
 const wordsController = require('./controllers/words');
 
 const app = express();
@@ -19,8 +20,9 @@ db.connect(function (err) {
         return console.log(err);
     }
 
-    app.listen(port, () => {
-        console.log('Сервер сәтті қосылды!');
+    app.listen(port, host, () => {
+        console.log('Сервер келесі мекен-жайда істеп тұр: '+
+        'http://'+ host + ':' + port);
     })
 
 })
