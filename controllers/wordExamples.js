@@ -1,7 +1,8 @@
-const Words = require('../models/words');
+const WordExamples = require('../models/wordExamples');
+const ObjectID = require('mongodb').ObjectID
 
 exports.all = (req, res) => {
-    Words.all((err, docs) => {
+    WordExamples.all((err, docs) => {
         if (err) {
             console.log(err);
             return res.sendStatus(500);
@@ -11,7 +12,7 @@ exports.all = (req, res) => {
 }
 
 exports.findById = (req, res) => {
-    Words.findById(req.params.id, (err, doc) => {
+    WordExamples.findById(req.params.id, (err, doc) => {
         if (err) {
             console.log(err);
             return res.sendStatus(500);
@@ -21,21 +22,22 @@ exports.findById = (req, res) => {
 }
 
 exports.create = (req, res) => {
-    var artist = {
-        name: req.body.name
+    var example = {
+        wordId: ObjectID(req.params.id), 
+        text: req.body.text
     };
 
-    Words.create(artist, (err, result) => {
+    WordExamples.create(example, (err, result) => {
         if (err) {
             console.log(err);
             return res.sendStatus(500);
         }
-        res.send(artist);
+        res.send(example);
     })
 }
 
 exports.update = (req, res) => {
-    Words.update(req.params.id, { name: req.body.name }, (err, result) => {
+    WordExamples.update(req.params.id, { name: req.body.text }, (err, result) => {
         if (err) {
             console.log(err);
             return res.sendStatus(500);
@@ -46,23 +48,11 @@ exports.update = (req, res) => {
 
 exports.delete = (req, res) => {
     const id = req.params.id;
-    Words.delete(id, (err, result) => {
+    WordExamples.delete(id, (err, result) => {
         if (err) {
             console.log(err);
             return res.sendStatus(500);
         }
         res.sendStatus(200);
-    })
-}
-
-exports.examples = (req, res) => {
-    Words.wordExamples(req.params.id, (err, examples) => {
-        console.log(req.params.id);
-        if (err) {
-            console.log(err);
-            return res.sendStatus(500);
-        }
-        
-        res.send(examples);
     })
 }
