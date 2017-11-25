@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient;
 const ObjectID = require('mongodb').ObjectID;
-const db = require('./db');
+const db = require('./config/db');
 const port = 3012;
 const wordsController = require('./controllers/words');
 
@@ -14,7 +14,7 @@ app.get('/', function(req,res){
     res.send("Hello Kacgari API");
 })
 
-db.connect('mongodb://localhost:32768/mydb', function(err){
+db.connect(function(err){
     if(err){
         return console.log(err);
     }
