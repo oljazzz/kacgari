@@ -21,16 +21,17 @@ exports.findById = (req, res) => {
 }
 
 exports.create = (req, res) => {
-    var artist = {
-        name: req.body.name
+    const word = {
+        text: req.body.text,
+        desc: req.body.desc
     };
 
-    Words.create(artist, (err, result) => {
+    Words.create(word, (err, result) => {
         if (err) {
             console.log(err);
             return res.sendStatus(500);
         }
-        res.send(artist);
+        res.send(word);
     })
 }
 
