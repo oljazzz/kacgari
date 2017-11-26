@@ -6,13 +6,13 @@ const db = require('./config/db');
 const port = 3012;
 const host = '0.0.0.0';
 const wordRoutes = require('./routes');
-
+const wordExamplesRoutes = require('./routes');
 const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/', function (req, res) {
-    res.send("Hello Kacgari API");
+    res.send("Welcome to Kacgari API");
 })
 
 db.connect(function (err) {
@@ -20,9 +20,10 @@ db.connect(function (err) {
         return console.log(err);
     }
     wordRoutes(app);
+    wordExamplesRoutes(app);
     app.listen(port, host, () => {
-        console.log('Сервер келесі мекен-жайда істеп тұр: '+
-        'http://'+ host + ':' + port);
+        console.log('Сервер келесі мекен-жайда істеп тұр: ' +
+            'http://' + host + ':' + port);
     })
 
 })
