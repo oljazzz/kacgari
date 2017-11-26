@@ -7,6 +7,7 @@ const port = 3012;
 const host = '0.0.0.0';
 const wordRoutes = require('./routes');
 const wordExamplesRoutes = require('./routes');
+const wordSourcesRoutes = require('./routes');
 const app = express();
 
 app.use(bodyParser.json());
@@ -21,6 +22,7 @@ db.connect(function (err) {
     }
     wordRoutes(app);
     wordExamplesRoutes(app);
+    wordSourcesRoutes(app);
     app.listen(port, host, () => {
         console.log('Сервер келесі мекен-жайда істеп тұр: ' +
             'http://' + host + ':' + port);

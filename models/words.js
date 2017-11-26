@@ -1,6 +1,7 @@
 const db = require('../config/db');
 const ObjectID = require('mongodb').ObjectID
 const wordExamples = require('./wordExamples');
+const wordSources = require('./wordSources');
 
 exports.all = (cb) => {
     db.get().collection('words').find().toArray((err, docs) => {
@@ -42,5 +43,11 @@ exports.delete = (id, cb) => {
 exports.wordExamples = (wordId, cb) => {
     wordExamples.allExamplesOfWord(wordId, (err, docs) => {
         cb(err, docs);
+    })
+}
+
+exports.wordSources = (wordId, cb)=>{
+    wordSources.allSourcesOfWord(wordId, (err, sources)=>{
+        cb(err, sources);
     })
 }

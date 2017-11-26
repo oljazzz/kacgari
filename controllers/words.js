@@ -36,7 +36,7 @@ exports.create = (req, res) => {
 }
 
 exports.update = (req, res) => {
-    Words.update(req.params.id, { name: req.body.name }, (err, result) => {
+    Words.update(req.params.id, { text: req.body.text, desc: req.body.desc }, (err, result) => {
         if (err) {
             console.log(err);
             return res.sendStatus(500);
@@ -46,8 +46,7 @@ exports.update = (req, res) => {
 }
 
 exports.delete = (req, res) => {
-    const id = req.params.id;
-    Words.delete(id, (err, result) => {
+    Words.delete(req.params.id, (err, result) => {
         if (err) {
             console.log(err);
             return res.sendStatus(500);
@@ -58,12 +57,22 @@ exports.delete = (req, res) => {
 
 exports.examples = (req, res) => {
     Words.wordExamples(req.params.id, (err, examples) => {
-        console.log(req.params.id);
+        console.log("word id: " + req.params.id);
         if (err) {
             console.log(err);
             return res.sendStatus(500);
         }
-        
         res.send(examples);
+    })
+}
+
+exports.sources = (req, res) => {
+    Words.wordSources(req.params.id, (err, sources) => {
+        console.log("word id: " + req.params.id);
+        if (err) {
+            console.log(err);
+            return res.sendStatus(500);
+        }
+        res.send(sources);
     })
 }
