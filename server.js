@@ -12,11 +12,9 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.get('/', function (req, res) {
-    res.send("Welcome to Kacgari API");
-})
+app.get('/', (req, res) => res.send("Welcome to Kacgari API"))
 
-db.connect(function (err) {
+db.connect((err) => {
     if (err) {
         return console.log(err);
     }
