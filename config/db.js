@@ -1,14 +1,14 @@
 const MongoClient = require('mongodb').MongoClient;
-const databaseUrl = require('./url');
+
 var state = {
     db: null
 };
 
-exports.connect = (done) => {
+exports.connect = (url, done) => {
     if (state.db) {
         return done();
     }
-    MongoClient.connect(databaseUrl.url, (err, db) => {
+    MongoClient.connect(url, (err, db) => {
         if (err) {
             return done(err);
         }
